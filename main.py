@@ -27,14 +27,14 @@ driver.get("https://facebook.com")
 
 
 def login():
-    # I use environment veriable  base on this tutorials https://www.youtube.com/watch?v=IolxqkL7cD8
+    # I use environment variable  base on this tutorials https://www.youtube.com/watch?v=IolxqkL7cD8
     username = os.environ.get('facebook_email')
     password = os.environ.get('facebook_pass')
-
+    print(username)
+    print(input("Press any Key: "))
     driver.find_element(By.NAME, "email").send_keys(username)
     driver.find_element(By.NAME, "pass").send_keys(password)
     driver.find_element(By.NAME, "login").click()
-    print(input("Press any Key: "))
     print("Login work Successfully ")
 
 
@@ -55,4 +55,13 @@ def open_group_list():
 
 
 open_group_list()
-
+# todo:
+# todo:
+# todo:
+# todo:
+# todo:
+# todo:
+# todo:
+# todo:
+# todo:
+# todo:
