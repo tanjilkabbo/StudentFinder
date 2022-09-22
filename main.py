@@ -27,15 +27,17 @@ driver.get("https://facebook.com")
 
 
 def login():
-    # I use environment variable  base on this tutorials https://www.youtube.com/watch?v=IolxqkL7cD8
-    username = os.environ.get('facebook_email')
-    password = os.environ.get('facebook_pass')
-    print(username)
-    print(input("Press any Key: "))
-    driver.find_element(By.NAME, "email").send_keys(username)
-    driver.find_element(By.NAME, "pass").send_keys(password)
-    driver.find_element(By.NAME, "login").click()
-    print("Login work Successfully ")
+    try:
+        # I use environment variable  base on this tutorials https://www.youtube.com/watch?v=IolxqkL7cD8
+        username = os.environ.get('facebook_email')
+        password = os.environ.get('facebook_pass')
+        driver.find_element(By.NAME, "email").send_keys(username)
+        driver.find_element(By.NAME, "pass").send_keys(password)
+        driver.find_element(By.NAME, "login").click()
+
+        print(input("Login work Successfully Press any Key: "))
+    except:
+        pass
 
 
 login()
@@ -49,19 +51,21 @@ def open_group_list():
 
     for groupLinkList in lines:
         driver.get(groupLinkList)
-        print(groupLinkList + " link")
+        print(groupLinkList + "link")
         time.sleep(2)
-        print(input("Press any Key: "))
+
+        # Automatically click join button
+        driver.find_element(By.XPATH, "//span[contains(text(),'Joined')]").click()
+        url = driver.current_url
+        print(url)
+
+        # Write in a Text File
+        with open('joinedGroupList.txt', 'a') as the_file:
+            the_file.write(f'{url}\n')
+
+        print(input("Visit Next : "))
+
+
 
 
 open_group_list()
-# todo:
-# todo:
-# todo:
-# todo:
-# todo:
-# todo:
-# todo:
-# todo:
-# todo:
-# todo:
