@@ -4,7 +4,6 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import pathlib
 
-
 # Setting the chrome_options
 from selenium.webdriver.common.by import By
 
@@ -20,7 +19,6 @@ chrome_options.add_experimental_option("useAutomationExtension", False)
 chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
 chrome_options.add_argument("user-data-dir=chrome-data")
 chrome_options.add_argument(f"user-data-dir={scriptDirectory}\\userdata")
-
 
 driver = webdriver.Chrome("chromedriver.exe", chrome_options=chrome_options)
 driver.get("https://facebook.com")
@@ -53,19 +51,23 @@ def open_group_list():
         driver.get(groupLinkList)
         print(groupLinkList + "link")
         time.sleep(2)
+        driver.implicitly_wait(4)
 
         # Automatically click join button
-        driver.find_element(By.XPATH, "//span[contains(text(),'Joined')]").click()
-        url = driver.current_url
-        print(url)
+        if driver.find_elements(By.XPATH, "//span[contains(text(),'Joined')]"):
+            join_button_object = driver.find_element(By.XPATH, "//span[contains(text(),'Joined')]")
+            print(join_button_object)
+            join_button_object.click()
 
-        # Write in a Text File
-        with open('joinedGroupList.txt', 'a') as the_file:
-            the_file.write(f'{url}\n')
+            # print(input("Stop :"))
+            url = driver.current_url
+            print(url)
 
-        print(input("Visit Next : "))
+            # Write in a Text File
+            with open('joinedGroupList.txt', 'a') as the_file:
+                the_file.write(f'{url}\n')
 
-
+        # print(input("Visit Next : "))
 
 
 open_group_list()
