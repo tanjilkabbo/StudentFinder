@@ -2,7 +2,6 @@ import os
 import time
 
 import gspread
-from google.auth.app_engine import Credentials
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import pathlib
@@ -44,9 +43,9 @@ def login():
 login()
 
 
-def open_group_list():
+def open_group_list(index=0):
     # with open('postList.txt') as file:
-    with open('groupList.txt') as file:
+    with open('TextFile/groupList.txt') as file:
         lines = file.readlines()
         print("We have to work with " + str(len(lines)) + " link")
 
@@ -69,28 +68,16 @@ def open_group_list():
             # TODO: Write in a googleSheet
             """
             Documentation :
-            https://docs.gspread.org/en/v5.4.0/oauth2.html#oauth-client-id
-            Tutorials :
-            https://www.youtube.com/watch?v=wrR0YLzh4DQ&t=325s            
+            https://docs.gspread.org/en/v5.4.0/oauth2.html#oauth-client-id          
             """
-            scopes = [
-                'https://www.googleapis.com/auth/spreadsheets',
-                'https://www.googleapis.com/auth/drive'
-            ]
-
-            creds = Credentials.from_service_account_file(
-                r'C:\Users\user\PycharmProjects\StudentFinder\studentfindergspreed-aa5ba05c0365.json',
-                scopes=scopes
-            )
-
-            client = gspread.authorize(creds)
-
-            spreedsheet = client.open("StudentFinder")
-            worksheet = spreedsheet.add_worksheet("PythonFacebookGroupList")
-            worksheet.update_cell(1, 1, url)
+            gc = gspread.service_account('studentfindergspreed-aa5ba05c0365.json')
+            spreadsheet = gc.open("StudentFinder")
+            worksheet = spreadsheet.worksheet("PythonFacebookGroupList")
+            index += 1
+            worksheet.update_cell(index, 1, url)
 
             # Write in a Text File
-            with open('joinedGroupList.txt', 'a') as the_file:
+            with open('TextFile/joinedGroupList.txt', 'a') as the_file:
                 the_file.write(f'{url}\n')
 
         # print(input("Visit Next : "))
