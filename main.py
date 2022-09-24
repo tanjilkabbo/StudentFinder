@@ -1,5 +1,8 @@
 import os
 import time
+
+import gspread
+from google.auth.app_engine import Credentials
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import pathlib
@@ -62,6 +65,29 @@ def open_group_list():
             # print(input("Stop :"))
             url = driver.current_url
             print(url)
+
+            # TODO: Write in a googleSheet
+            """
+            Documentation :
+            https://docs.gspread.org/en/v5.4.0/oauth2.html#oauth-client-id
+            Tutorials :
+            https://www.youtube.com/watch?v=wrR0YLzh4DQ&t=325s            
+            """
+            scopes = [
+                'https://www.googleapis.com/auth/spreadsheets',
+                'https://www.googleapis.com/auth/drive'
+            ]
+
+            creds = Credentials.from_service_account_file(
+                r'C:\Users\user\PycharmProjects\StudentFinder\studentfindergspreed-aa5ba05c0365.json',
+                scopes=scopes
+            )
+
+            client = gspread.authorize(creds)
+
+            spreedsheet = client.open("StudentFinder")
+            worksheet = spreedsheet.add_worksheet("PythonFacebookGroupList")
+            worksheet.update_cell(1, 1, url)
 
             # Write in a Text File
             with open('joinedGroupList.txt', 'a') as the_file:
