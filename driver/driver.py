@@ -5,6 +5,7 @@ from selenium.webdriver.chrome.options import Options
 
 chrome_options = Options()
 scriptDirectory = pathlib.Path().absolute()
+# scriptDirectory = pathlib.PurePath("../driver")
 chrome_options.add_argument("--start-maximized")
 chrome_options.add_argument("--user-data-dir=chrome-data")
 chrome_options.add_argument('--profile-directory=Profile 8')
