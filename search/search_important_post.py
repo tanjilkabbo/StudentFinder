@@ -24,7 +24,7 @@ def visit_link_list(driver, link_list):
         driver.implicitly_wait(4)
 
         SearchKeyword().scrollAndSearchUsingXpath(driver)
-        SearchKeyword().searchWordUsingXpath(driver)
+        SearchKeyword().searchWordUsingXpath(driver, "interested")
 
     print(f"\nWe visit {len(link_list)} link")
     return len(link_list)

@@ -53,9 +53,8 @@ class SearchKeyword:
             grpupPostXpathAria[len(index)-1].click()
         self.pageStart(driver)
 
-
-    def searchWordUsingXpath(self, driver):
-        search_interested_word_xpath = "//div[contains(text(),interested)]"
+    def searchWordUsingXpath(self, driver, word="interested"):
+        search_interested_word_xpath = f"//div[contains(text(),{word})]"
         searchWordhAria = driver.find_elements(By.XPATH, search_interested_word_xpath)
         # print(searchWordhAria)
         # print(str(len(searchWordhAria)) + " interested Word Found")
@@ -68,7 +67,7 @@ class SearchKeyword:
             text = allText
 
             index = []
-            for m in re.finditer(r"\binterested\b", text):
+            for m in re.finditer(f"\b{word}\b", text):
                 if m.group(0):
                     index.append(m)
                     print("Present")
@@ -79,13 +78,13 @@ class SearchKeyword:
                     winsound.Beep(freq, dur)
                 else:
                     print("Absent")
-                print(str(len(index)) + " no 'interested' Word Found")
+                print(str(len(index)) + f" no {word} Word Found")
 
             if len(index) != 0:
-                print("Total " + str(len(index)) + " 'interested' Word Found")
+                print("Total " + str(len(index)) + f" {word} Word Found")
                 print(input("Press any Key: "))
             else:
-                print("No 'interested' Word Found")
+                print(f"No {word} Word Found")
 
 
 # from driver.driver import Driver
