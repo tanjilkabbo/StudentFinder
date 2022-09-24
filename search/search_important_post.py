@@ -17,8 +17,10 @@ print(group_list)
 
 
 def visit_link_list(driver, link_list):
+    list_index = []
     for link in link_list:
-        print(link)
+        list_index.append(link)
+        print(f"\n* {len(list_index)} : {link}\n")
         driver.get(link)
         time.sleep(2)
         driver.implicitly_wait(4)
