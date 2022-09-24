@@ -3,6 +3,7 @@ import time
 from driver.driver import Driver
 from googlesheet.connection import Connection
 from login.login import Login
+from search.keyword_search import SearchKeyword
 
 driver = Driver().driver
 driver.get("https://facebook.com")
@@ -15,15 +16,19 @@ group_list = work_sheet.col_values(1)
 print(group_list)
 
 
-def visit_link_list(link_list):
+def visit_link_list(driver, link_list):
     for link in link_list:
         print(link)
         driver.get(link)
         time.sleep(2)
         driver.implicitly_wait(4)
+
+        SearchKeyword().scrollAndSearchUsingXpath(driver)
+        SearchKeyword().searchWordUsingXpath(driver)
+
     print(f"\nWe visit {len(link_list)} link")
     return len(link_list)
 
 
-visit_link_list(group_list)
+visit_link_list(driver, group_list)
 
