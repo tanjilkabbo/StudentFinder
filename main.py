@@ -9,6 +9,8 @@ import pathlib
 # Setting the chrome_options
 from selenium.webdriver.common.by import By
 
+from login.login import Login
+
 chrome_options = Options()
 scriptDirectory = pathlib.Path().absolute()
 chrome_options.add_argument("--start-maximized")
@@ -26,21 +28,7 @@ driver = webdriver.Chrome("chromedriver.exe", chrome_options=chrome_options)
 driver.get("https://facebook.com")
 
 
-def login():
-    try:
-        # I use environment variable  base on this tutorials https://www.youtube.com/watch?v=IolxqkL7cD8
-        username = os.environ.get('facebook_email')
-        password = os.environ.get('facebook_pass')
-        driver.find_element(By.NAME, "email").send_keys(username)
-        driver.find_element(By.NAME, "pass").send_keys(password)
-        driver.find_element(By.NAME, "login").click()
-
-        print(input("Login work Successfully Press any Key: "))
-    except:
-        pass
-
-
-login()
+Login().login(driver)
 
 
 def open_group_list(index=0):
