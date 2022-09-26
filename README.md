@@ -21,9 +21,4 @@ Enjoy !
 
 Video Instruction : 
 
-[![M S P](https://user-images.githubusercontent.com/4492335/192181928-b3408b78-45cf-471e-b2e3-5291d9eef2bf.png)](https://youtu.be/vPloA4F74xA)
-
-
-
-
-
+[![Python Student Finder](https://user-images.githubusercontent.com/4492335/192185514-41890d77-1390-40a9-ab2a-83c970a6e632.png)](https://youtu.be/vPloA4F74xA)
