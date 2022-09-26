@@ -22,3 +22,6 @@ Enjoy !
 Video Instruction : 
 
 [![Python Student Finder](https://user-images.githubusercontent.com/4492335/192185514-41890d77-1390-40a9-ab2a-83c970a6e632.png)](https://youtu.be/vPloA4F74xA)
+
+How yo connect google sheet :
+https://youtu.be/meZPbPcr80U
