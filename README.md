@@ -3,8 +3,8 @@
 ## Project Setup 
 1. prepare virtual environment :   
 
-2. Setup Selenium Lighbary :
-   "pip install selenium"
+2. Install all modules :
+   "pip install requirements.txt"
 
 
 3. download the latest version of chrome
@@ -19,7 +19,11 @@ After that run the "main.py"
 
 Enjoy !
 
-![M S P](https://user-images.githubusercontent.com/4492335/192181928-b3408b78-45cf-471e-b2e3-5291d9eef2bf.png)
+Video Instruction : 
+
+[![M S P](https://user-images.githubusercontent.com/4492335/192181928-b3408b78-45cf-471e-b2e3-5291d9eef2bf.png)](https://youtu.be/vPloA4F74xA)
+
+
 
 
 
