@@ -6,7 +6,7 @@ message = "Hi, " \
           "Actually its come from kindergarten math. We all know x , y math." \
           "In Bangla We called 'চলক' , In programming we called it variable." \
           "You see 6 class math. We are going to learn like that. to know more" \
-          "about me I give yoy my github profile. Its give you a perception about" \
+          "about me I give yoy my github profile. Its give you a perception about " \
           "my creditability.'https://github.com/sushen'. If you think I can help you to learn" \
           "I will be glad to spend time with you."
 
