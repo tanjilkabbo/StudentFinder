@@ -2,15 +2,18 @@ from selenium.webdriver.common.by import By
 
 from message.message_text import MessageText
 
-message = MessageText()
-
-# print(first_message)
+from datetime import datetime
 
 import time
 
 from driver.driver import Driver
 from googlesheet.connection import Connection
 from login.login import Login
+
+
+message = MessageText()
+# print(first_message)
+
 
 driver = Driver().driver
 driver.get("https://facebook.com")
@@ -29,18 +32,32 @@ group_list = work_sheet.col_values(1)
 
 
 def send_message(current_loop_position, message_number):
-    driver.find_element(By.XPATH, "//span[contains(text(),'Message')]").click()
-    driver.find_element(By.XPATH, "//p[@class='m8h3af8h kjdc1dyq']").send_keys(message.ai_text(message_number))
-    driver.find_element(By.XPATH, "//div[@aria-label='Press enter to send']//*[name()='svg']").click()
-    time.sleep(4)
 
-    driver.find_element(By.XPATH, "//div[@aria-label='Close chat']").click()
+    current_unix_time = int(datetime.now().timestamp())
+    total_second_in_day = 60 * 60 * 24
+    cell_value = work_sheet.cell(current_loop_position+1, 3).value
 
-    work_sheet.update_cell(current_loop_position + 1, 2, message_number + 1)
+    if (int(cell_value) + total_second_in_day) < current_unix_time:
+        print(f"We send last message {int(((current_unix_time - int(cell_value))/60)/60)} hours ago.")
+        driver.find_element(By.XPATH, "//span[contains(text(),'Message')]").click()
+        driver.find_element(By.XPATH, "//p[@class='m8h3af8h kjdc1dyq']").send_keys(message.ai_text(message_number))
+        driver.find_element(By.XPATH, "//div[@aria-label='Press enter to send']//*[name()='svg']").click()
+        time.sleep(4)
 
-    after_sell_value = work_sheet.row_values(current_loop_position + 1)
-    print(f"Sell Value After: {after_sell_value}")
-    return print(f"Message: \n{message.ai_text(message_number)}\n")
+        driver.find_element(By.XPATH, "//div[@aria-label='Close chat']").click()
+
+        # Update Message Number Field
+        work_sheet.update_cell(current_loop_position + 1, 2, message_number + 1)
+
+        # Update Time Field
+        work_sheet.update_cell(current_loop_position + 1, 3, int(datetime.now().timestamp()))
+
+        after_sell_value = work_sheet.row_values(current_loop_position + 1)
+        print(f"Sell Value After: {after_sell_value}")
+        return print(f"Message: \n{message.ai_text(message_number)}\n")
+
+    else:
+        print("We just send him a message today. We dont want to send too much message in one person")
 
 
 def visit_link_list(driver, link_list):
@@ -57,10 +74,11 @@ def visit_link_list(driver, link_list):
         # print(i+1)
         # print(input("Stop :"))
 
-        # TODO : Make a time if block to add time logic. if you send message someone within 24 hours you will not
-        #  send him message again.
+        if len(sell_value) <= 2:
+            print(len(sell_value))
+            work_sheet.update_cell(i + 1, 3, int(datetime.now().timestamp()))
 
-        if sell_value[1] == '0':
+        elif sell_value[1] == '0':
             print(f"{sell_value[1]} Value found that means\nHuman are talking to this person.")
 
         elif sell_value[1] == '1':
@@ -78,7 +96,7 @@ def visit_link_list(driver, link_list):
         else:
             print("Extend message_text.py file for more message")
 
-        print(input("Message Next Person:"))
+        # print(input("Message Next Person:"))
 
     print(f"\nWe visit {len(link_list)} link")
     return len(link_list)
