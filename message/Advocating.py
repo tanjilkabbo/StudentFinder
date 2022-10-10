@@ -1,6 +1,8 @@
 """
 We test our advocacy in this page : https://www.facebook.com/groups/341334433330410/permalink/1266678044129373/
 """
+import random
+
 from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.common.by import By
 from message.message_text import MessageText
@@ -12,8 +14,15 @@ from login.login import Login
 import re
 
 
-message = "Are you using broadband internet ?"
-# print(first_message)
+massage_list = ["Are you using broadband internet ?",
+                "Are you using a PC for programming?",
+                "What is your PC configuration ?",
+                "What is your timezone?"]
+
+# message = random.choice(massage_list)
+# print(message)
+
+# print(input("Testing Message :"))
 
 
 driver = Driver().driver
@@ -66,14 +75,14 @@ for comment in main_comments:
         print("Total " + str(len(index)) + " 'interested' Word Found")
         action.move_to_element(comment).click(comment).perform()
         main_comments_reply_button[len(comment_index) - 1].click()
-        action.send_keys(message).send_keys(Keys.ENTER).perform()
+        action.send_keys(random.choice(massage_list)).send_keys(Keys.ENTER).perform()
         print(input("Press any Key: "))
     else:
         print("No 'interested' Word Found")
 
     print("......................")
 
-print(input("Stop :"))
+print(input("Comment Done :"))
 time.sleep(60)
 
 driver.implicitly_wait(10)
