@@ -52,46 +52,26 @@ comment_index = []
 for comment in main_comments:
     comment_index.append(comment)
     print(f"Index : {len(comment_index)}")
+
+    # TODO: We can implement a natural language processor here
     print(comment.text)
-    re.finditer(r"\binterested\b", comment.text)
-    # TODO : Base on regular expression create condition
-    action.move_to_element(comment).click(comment).perform()
-    main_comments_reply_button[len(comment_index)-1].click()
-    action.send_keys(message).perform()
-    # time.sleep(5)
+    # Base on regular expression create condition
+    index = []
+    for m in re.finditer(r"\binterested\b", comment.text):
+        if m.group(0):
+            index.append(m)
+            print("Present")
+
+    if len(index) != 0:
+        print("Total " + str(len(index)) + " 'interested' Word Found")
+        action.move_to_element(comment).click(comment).perform()
+        main_comments_reply_button[len(comment_index) - 1].click()
+        action.send_keys(message).send_keys(Keys.ENTER).perform()
+        print(input("Press any Key: "))
+    else:
+        print("No 'interested' Word Found")
+
     print("......................")
-    print(input("Stop :"))
-
-
-# time.sleep(10)
-# driver.implicitly_wait(10)
-# all_comments_fb_profile = driver.find_elements(By.XPATH, "//span[@class='x3nfvp2']")
-# print(len(all_comments_fb_profile))
-#
-# action = ActionChains(driver)
-#
-# for fb_profile in all_comments_fb_profile:
-#     action.move_to_element(fb_profile).perform()
-#     time.sleep(4)
-#     print(fb_profile.text)
-#     if fb_profile.text == 'Garrowolf Sauber':
-#         # action.move_to_element(fb_profile)
-#         action.move_to_element(fb_profile).\
-#             key_down(Keys.CONTROL).\
-#             click(fb_profile).\
-#             key_up(Keys.CONTROL).\
-#             send_keys(Keys.TAB).\
-#             send_keys(Keys.TAB).\
-#             send_keys(Keys.TAB).\
-#             send_keys(Keys.TAB).\
-#             send_keys(Keys.TAB). \
-#             pause(2). \
-#             perform()
-#         time.sleep(2)
-#         # action.click().perform()
-#
-#         print(input("Stop :"))
-
 
 print(input("Stop :"))
 time.sleep(60)
