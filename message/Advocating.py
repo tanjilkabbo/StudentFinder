@@ -23,6 +23,9 @@ massage_list = ["Are you using broadband internet ?",
 # print(message)
 
 # print(input("Testing Message :"))
+# TODO : find Tanjil Hosain Kabbo and like his comment and make a encouraging reply in his post
+# group_link = "https://www.facebook.com/groups/python/permalink/1289109118596316/"
+
 group_link = "https://www.facebook.com/groups/341334433330410/permalink/1266678044129373/"
 
 driver = Driver().driver
@@ -76,7 +79,8 @@ for comment in main_comments:
         action.move_to_element(comment).click(comment).perform()
         main_comments_reply_button[len(comment_index) - 1].click()
         action.send_keys(random.choice(massage_list)).send_keys(Keys.ENTER).perform()
-        # print(input("Press any Key: "))
+        # time.sleep(4)
+        print(input("Press any Key: "))
     else:
         print("No 'interested' Word Found")
 
