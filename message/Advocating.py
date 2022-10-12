@@ -80,7 +80,7 @@ for comment in main_comments:
         main_comments_reply_button[len(comment_index) - 1].click()
         action.send_keys(random.choice(massage_list)).send_keys(Keys.ENTER).perform()
         # time.sleep(4)
-        print(input("Press any Key: "))
+        # print(input("Press any Key: "))
     else:
         print("No 'interested' Word Found")
 
