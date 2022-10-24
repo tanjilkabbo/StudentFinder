@@ -31,10 +31,11 @@ def visit_link_list(driver, link_list):
         time.sleep(2)
         driver.implicitly_wait(4)
 
-        SearchKeyword().scrollAndSearchUsingXpath(driver)
-        SearchKeyword().searchWordUsingXpath(driver)
+        # SearchKeyword().scrollAndSearchUsingXpath(driver)
+        # SearchKeyword().searchWordUsingXpath(driver)
+        SearchKeyword().searchCommentUsingXpath(driver)
 
-        print(input("Visit next group :"))
+        # print(input("Visit next group :"))
 
     print(f"\nWe visit {len(link_list)} link")
     return len(link_list)
